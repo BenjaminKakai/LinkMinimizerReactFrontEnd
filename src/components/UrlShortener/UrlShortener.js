@@ -5,10 +5,11 @@ import UrlShortenerButton from './UrlShortenerButton'; // Correct the import pat
 function UrlShortener() {
   return (
     <div className="url-shortener">
-      <h1>Simple URL Shortener</h1>
-      <input type="text" id="urlInput" placeholder="Enter your URL here" />
-      {/* Replace the button with UrlShortenerButton component */}
-      <UrlShortenerButton />
+      <h1>Simple URL Shortener</h1> 
+      <div>
+        <input type="text" id="urlInput" placeholder="Enter your URL here" />
+        <UrlShortenerButton />
+      </div>
       <p id="result"></p>
     </div>
   );
