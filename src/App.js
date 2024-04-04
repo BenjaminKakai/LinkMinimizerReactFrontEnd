@@ -13,10 +13,6 @@ function App() {
       background: 'linear-gradient(to bottom, #36D1DC, #5B86E5)'
     }}>
       <ShortenerBody/>
-      {/**
-       * <UrlShortener />
-       * <Analytics />
-      * */}
     </div>
   );
 }
