@@ -25,8 +25,7 @@ export default function ShortenerBody() {
       }
       
       await axios.post(baseUrl,payload).then((response)=>{
-        console.log(response?.data?.short_code);
-        set_shortened_url(response?.data?.short_code);
+        set_shortened_url(`http://3000/${response?.data?.short_url}`);
       }).catch((err)=>{
         console.log(err);
       });
@@ -55,33 +54,27 @@ export default function ShortenerBody() {
           borderRadius:'10px',
           padding:'16px'
         }}>
-          <div 
-            style={{
-              display:'flex',
-              flexDirection:'row',
-              width:'100%',
-              alignItems:'center',
-            }}
-          >
-            <FaLink />
-            <input
-              style={{
-                marginLeft:'10px',
-                border:'none',
-                fontWeight:'bold',
-                flex:1,
-                outline:'none',
-                padding:'10px',
-                borderBottom:'1px solid #e5e5e5',
-                marginRight:'5px',
-              }}
-              {...register("url_input", { required: true,pattern: {value: URL_REGEX, message: 'This does not seem to be a link'}})}
-              id='url_input'
-              name='url_input'
-              placeholder='Paste a long url here'
-              type='url'
-            />
-            {errors.url_input && <span>{errors.url_input.message}</span>}
+          <div style={"display:flex;flexDirection:row;width:100%;alignItems:center;@media (max-width: 400px) { flexDirection: column }"}>
+            <div style={{display:'flex',alignItems:'center'}}>
+              <FaLink />
+              <input
+                style={{
+                  marginLeft:'10px',
+                  border:'none',
+                  fontWeight:'bold',
+                  flex:1,
+                  outline:'none',
+                  padding:'10px',
+                  borderBottom:'1px solid #e5e5e5',
+                  marginRight:'5px',
+                }}
+                {...register("url_input", { required: true,pattern: {value: URL_REGEX, message: 'This does not seem to be a link'}})}
+                id='url_input'
+                name='url_input'
+                placeholder='Paste a long url here'
+                type='url'
+              />
+            </div>
             {isSubmitting? 
               <button style={{
                 backgroundColor:'#e5e5e5',
@@ -117,8 +110,14 @@ export default function ShortenerBody() {
               disabled={isSubmitting}
             >Shorten</button>}
           </div>
+          {errors.url_input && <span>{errors.url_input.message}</span>}
           {isSubmitting? <Loading/> : null}
-          {shortened_url? <Text>{shortened_url}</Text>:null}
+          {shortened_url?
+            <div style={{padding:'10px',display:'flex',flexDirection:'row',alignItems:'center'}}>
+              <p style={{marginRight:'4px'}}>Short-Link:</p>
+              <a href={`${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
+            </div> 
+          :null}
         </div>
       </form>
     </div>
