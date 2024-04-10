@@ -19,13 +19,13 @@ export default function ShortenerBody() {
   const onSubmit = async(data) =>{
     try {
       console.log(data)
-      const baseUrl = `http://localhost:3001/shorten`;
+      const baseUrl = `http://localhost:3000/shorten`;
       const payload = {
         url: data?.url_input
       }
       
       await axios.post(baseUrl,payload).then((response)=>{
-        set_shortened_url(`http://3000/${response?.data?.short_url}`);
+        set_shortened_url(`http://127.0.0.1:3000/${response?.data?.short_url}`);
       }).catch((err)=>{
         console.log(err);
       });
@@ -54,8 +54,8 @@ export default function ShortenerBody() {
           borderRadius:'10px',
           padding:'16px'
         }}>
-          <div style={"display:flex;flexDirection:row;width:100%;alignItems:center;@media (max-width: 400px) { flexDirection: column }"}>
-            <div style={{display:'flex',alignItems:'center'}}>
+          <div style={{display:'flex',width:'100', flexDirection:'column'}}>
+                        <div style={{display:'flex',alignItems:'center', flex : 1, marginBottom:'5px'}}>
               <FaLink />
               <input
                 style={{
