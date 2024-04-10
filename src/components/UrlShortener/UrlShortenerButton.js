@@ -10,7 +10,7 @@ function UrlShortenerButton() {
       return;
     }
 
-    fetch('http://localhost:3000/shorten', {
+    fetch('https://quiet-caverns-95907-14695f2a4a5c.herokuapp.com/shorten', { // Update the URL here
       method: 'POST', // Ensure that the method is POST
       headers: {
         'Content-Type': 'application/json',
@@ -31,12 +31,12 @@ function UrlShortenerButton() {
     <div>
       <button onClick={handleShortenUrl}>Shorten URL</button>
       {response && (
-  <div>
-    {/* Display the shortened URL */}
-    Shortened URL: <a href={response.shortUrl} target="_blank">{response.shortUrl}</a>
-  </div>
-)}
-</div>
+        <div>
+          {/* Display the shortened URL */}
+          Shortened URL: <a href={response.shortUrl} target="_blank">{response.shortUrl}</a>
+        </div>
+      )}
+    </div>
   );
 }
 
