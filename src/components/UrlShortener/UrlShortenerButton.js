@@ -10,7 +10,7 @@ function UrlShortenerButton() {
       return;
     }
 
-    fetch('https://quiet-caverns-95907-14695f2a4a5c.herokuapp.com/shorten', { // Update the URL here
+    fetch('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/', { // Update the URL here
       method: 'POST', // Ensure that the method is POST
       headers: {
         'Content-Type': 'application/json',

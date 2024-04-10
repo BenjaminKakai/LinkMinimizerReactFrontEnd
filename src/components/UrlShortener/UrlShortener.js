@@ -19,7 +19,7 @@ export default function ShortenerBody() {
   const onSubmit = async(data) =>{
     try {
       console.log(data)
-      const baseUrl = `https://quiet-caverns-95907-14695f2a4a5c.herokuapp.com/shorten`;
+      const baseUrl = `https://quiet-reef-21453-76e7ef99e759.herokuapp.com/`;
       const payload = {
         url: data?.url_input
       }
@@ -115,7 +115,7 @@ export default function ShortenerBody() {
           {shortened_url?
             <div style={{padding:'10px',display:'flex',flexDirection:'row',alignItems:'center'}}>
               <p style={{marginRight:'4px'}}>Short-Link:</p>
-              <a href={`https://quiet-caverns-95907-14695f2a4a5c.herokuapp.com/${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
+              <a href={`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
             </div> 
           :null}
         </div>
