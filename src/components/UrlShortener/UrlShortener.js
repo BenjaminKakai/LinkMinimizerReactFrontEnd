@@ -19,13 +19,13 @@ export default function ShortenerBody() {
   const onSubmit = async(data) =>{
     try {
       console.log(data)
-      const baseUrl = `http://localhost:3000/shorten`;
+      const baseUrl = `https://quiet-caverns-95907-14695f2a4a5c.herokuapp.com/shorten`;
       const payload = {
         url: data?.url_input
       }
       
       await axios.post(baseUrl,payload).then((response)=>{
-        set_shortened_url(`http://127.0.0.1:3000/${response?.data?.short_url}`);
+        set_shortened_url(response?.data?.short_url);
       }).catch((err)=>{
         console.log(err);
       });
@@ -115,7 +115,7 @@ export default function ShortenerBody() {
           {shortened_url?
             <div style={{padding:'10px',display:'flex',flexDirection:'row',alignItems:'center'}}>
               <p style={{marginRight:'4px'}}>Short-Link:</p>
-              <a href={`${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
+              <a href={`https://quiet-caverns-95907-14695f2a4a5c.herokuapp.com/${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
             </div> 
           :null}
         </div>
