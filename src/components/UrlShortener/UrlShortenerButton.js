@@ -10,21 +10,21 @@ function UrlShortenerButton() {
       return;
     }
 
-    fetch('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/', { // Update the URL here
+    fetch('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/shorten', { // Updated backend endpoint URL
       method: 'POST', // Ensure that the method is POST
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ url: urlInput }),  // Pass the input URL to the backend
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Response data:', data); // Log the response data
-      setResponse(data); // Update state with the response data
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response data:', data); // Log the response data
+        setResponse(data); // Update state with the response data
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   return (

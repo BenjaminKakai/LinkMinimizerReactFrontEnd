@@ -8,14 +8,15 @@ function ShortUrlForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/', {  // Update the URL here
-        long_url: originalUrl
+      const response = await axios.post('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/shorten', { // Updated backend endpoint URL
+        url: originalUrl // Change long_url to url
       });
-      setShortenedUrl(`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/${response.data.short_code}`); // Update the URL here
+      setShortenedUrl(`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/${response.data.short_code}`);
     } catch (error) {
       console.error('There was an error shortening the URL:', error);
     }
   };
+  
 
   return (
     <div>
