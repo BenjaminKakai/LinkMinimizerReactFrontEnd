@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './UrlShortener.css';
 import UrlShortenerButton from './UrlShortenerButton'; // Correct the import path
 import { FaLink } from "react-icons/fa";
@@ -15,6 +15,25 @@ export default function ShortenerBody() {
   } = useForm();
 
   const [shortened_url, set_shortened_url] = useState('');
+
+  useEffect(() => {
+    // Code with side effects
+    const fetchData = async () => {
+      try {
+        const response = await axios.post('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/shorten', { url: 'https://www.google.com' });
+        set_shortened_url(response.data.short_url);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+
+    // Cleanup function if needed
+    return () => {
+      // Cleanup logic
+    };
+  }, []); // Empty dependency array means this effect runs only once on mount
 
   const onSubmit = async (data) => {
     try {
