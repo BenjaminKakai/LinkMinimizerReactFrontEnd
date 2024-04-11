@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './UrlShortener.css';
+import UrlShortenerButton from './UrlShortenerButton'; // Correct the import path
 import { FaLink } from "react-icons/fa";
 import { useForm } from "react-hook-form"
 import { Helmet } from 'react-helmet';
@@ -13,17 +14,21 @@ export default function ShortenerBody() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const [shortenedUrl, setShortenedUrl] = useState('');
+  const [shortened_url, set_shortened_url] = useState('');
 
   const onSubmit = async (data) => {
     try {
       console.log(data);
-      const response = await axios.post('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/shorten', {
+      const API_URL = 'https://quiet-reef-21453-76e7ef99e759.herokuapp.com/shorten'; // Updated API_URL
+      const payload = {
         url: data?.url_input
-      });
+      };
 
-      // Concatenate the short code with the base URL
-      setShortenedUrl(`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/${response.data.short_url}`);
+      await axios.post(API_URL, payload).then((response) => {
+        set_shortened_url(response?.data?.short_url);
+      }).catch((err) => {
+        console.log(err);
+      });
     } catch (error) {
       console.error(error);
     }
@@ -108,17 +113,17 @@ export default function ShortenerBody() {
           </div>
           {errors.url_input && <span>{errors.url_input.message}</span>}
           {isSubmitting ? <Loading /> : null}
-          {shortenedUrl ?
+          {shortened_url ?
             <div style={{ padding: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <p style={{ marginRight: '4px' }}>Short-Link:</p>
-              <a href={shortenedUrl} target="_blank" rel="noopener noreferrer" >{shortenedUrl}</a>
+              <a href={`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
             </div>
             : null}
         </div>
       </form>
     </div>
   );
-}
+};
 
 const Loading = () => {
   return (
@@ -138,4 +143,18 @@ const Loading = () => {
   )
 }
 
-export default ShortenerBody;
+const Success = ({ new_url }) => {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      marginTop: '5px',
+      width: '100%',
+      backgroundColor: '#e3e3e3'
+    }}>
+      Txt
+    </div>
+  )
+}
