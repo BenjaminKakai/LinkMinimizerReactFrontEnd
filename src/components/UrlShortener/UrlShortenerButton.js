@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function UrlShortenerButton() {
-  const [response, setResponse] = useState(null);
+  const [shortenedUrl, setShortenedUrl] = useState('');
 
   const handleShortenUrl = () => {
     const urlInput = document.getElementById('urlInput').value.trim(); // Get the input value
@@ -20,7 +20,7 @@ function UrlShortenerButton() {
       .then(response => response.json())
       .then(data => {
         console.log('Response data:', data); // Log the response data
-        setResponse(data); // Update state with the response data
+        setShortenedUrl(data.short_url); // Update state with the shortened URL
       })
       .catch(error => {
         console.error('Error:', error);
@@ -29,11 +29,12 @@ function UrlShortenerButton() {
 
   return (
     <div>
+      <input type="text" id="urlInput" placeholder="Enter URL to shorten" />
       <button onClick={handleShortenUrl}>Shorten URL</button>
-      {response && (
+      {shortenedUrl && (
         <div>
           {/* Display the shortened URL */}
-          Shortened URL: <a href={response.shortUrl} target="_blank">{response.shortUrl}</a>
+          Shortened URL: <a href={shortenedUrl} target="_blank" rel="noopener noreferrer">{shortenedUrl}</a>
         </div>
       )}
     </div>
