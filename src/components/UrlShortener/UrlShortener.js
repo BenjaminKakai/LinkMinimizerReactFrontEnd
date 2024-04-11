@@ -16,25 +16,6 @@ export default function ShortenerBody() {
 
   const [shortened_url, set_shortened_url] = useState('');
 
-  useEffect(() => {
-    // Code with side effects
-    const fetchData = async () => {
-      try {
-        const response = await axios.post('https://quiet-reef-21453-76e7ef99e759.herokuapp.com/shorten', { url: 'https://www.google.com' });
-        set_shortened_url(response.data.short_url);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function if needed
-    return () => {
-      // Cleanup logic
-    };
-  }, []); // Empty dependency array means this effect runs only once on mount
-
   const onSubmit = async (data) => {
     try {
       console.log(data);
@@ -135,7 +116,7 @@ export default function ShortenerBody() {
           {shortened_url ?
             <div style={{ padding: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <p style={{ marginRight: '4px' }}>Short-Link:</p>
-              <a href={`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
+              <a href={`https://quiet-reef-21453-76e7ef99e759.herokuapp.com/show/${shortened_url}`} target="_blank" rel="noopener noreferrer" >{shortened_url}</a>
             </div>
             : null}
         </div>
